@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		body{
+				background-image:url("https://media.istockphoto.com/id/1185747322/photo/blue-mesh-gradient-blurred-motion-abstract-background.jpg?s=612x612&w=0&k=20&c=5S8NBjBQCjL_5zMenfcRrx5X9m6AqJLwYbdTprLJPiA=");
+				background-repeat: no-repaet;	
+		}
+	</style>
+</head>
+<body>
+<script type="text/javascript">
+	
+	function store(){
+		var firstname=document.getElementById("firstname").value
+		console.log(firstname)
+		var password=document.getElementById("password").value
+		console.log(password)
+		fetch("http://localhost:3000/newData",{
+		method:"POST",
+		headers:{
+			"Content-Type":"application/json"
+		},
+		body:JSON.stringify({name:firstname,password:password})
+	})
+		.then((res)=>{
+			console.log(res)
+			if(res.status===200)
+				alert("added successfully")
+		})
+		.catch((err)=>{
+			alert(err)
+		})
+	}
+</script>
+<p><input placeholder="enter your name" id="firstname"/></p>
+<p><input placeholder="enter your password" id="password"/></p>
+<button onclick="store()">submit</button>
+</body>
+</html>
