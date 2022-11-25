@@ -9,22 +9,47 @@
 				background-image:url("https://media.istockphoto.com/id/1185747322/photo/blue-mesh-gradient-blurred-motion-abstract-background.jpg?s=612x612&w=0&k=20&c=5S8NBjBQCjL_5zMenfcRrx5X9m6AqJLwYbdTprLJPiA=");
 				background-repeat: no-repaet;	
 		}
+		.sec{
+			padding-left: 40%;
+			padding-top: 10%;
+		}
 	</style>
 </head>
 <body>
+<section class="sec">
+	<p><input placeholder="enter your name" id="firstname"/></p>
+	<p>
+		<input type="radio" name="gender" id="male"/>male
+		<input type="radio" name="gender" id="female"/>female
+		</p>
+	<p><input placeholder="enter your password" id="password"/></p>
+	<select id="select">
+	<option>select course</option>
+		<option>cams</option>
+		<option>mpcs</option>
+</select>
+
+<br><button onclick="store()">submit</button></br>
+</section>
 <script type="text/javascript">
-	
 	function store(){
 		var firstname=document.getElementById("firstname").value
 		console.log(firstname)
 		var password=document.getElementById("password").value
 		console.log(password)
+		var select=document.getElementById("select").value
+		console.log(select)
+		var gmale=document.getElementById("male").checked
+		var gfemale=document.getElementById("female").checked
+		if(gmale==true) var gender="male"
+			else var gender="female"
+				console.log(gender)
 		fetch("http://localhost:3000/newData",{
 		method:"POST",
 		headers:{
 			"Content-Type":"application/json"
 		},
-		body:JSON.stringify({name:firstname,password:password})
+		body:JSON.stringify({name:firstname,password:password,cors:select})
 	})
 		.then((res)=>{
 			console.log(res)
@@ -36,8 +61,6 @@
 		})
 	}
 </script>
-<p><input placeholder="enter your name" id="firstname"/></p>
-<p><input placeholder="enter your password" id="password"/></p>
-<button onclick="store()">submit</button>
+
 </body>
 </html>
